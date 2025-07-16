@@ -53,7 +53,7 @@ export function FileUpload({ onFileUpload, isLoading }: FileUploadProps) {
     <div className="w-full max-w-md mx-auto">
       <div
         className={`
-          border-2 border-dashed rounded-lg p-8 text-center transition-colors
+          border-2 border-dashed rounded-lg p-8 text-center transition-colors relative
           ${isDragOver ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-gray-400"}
           ${isLoading ? "pointer-events-none opacity-50" : "cursor-pointer"}
         `}
