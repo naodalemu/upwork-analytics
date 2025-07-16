@@ -87,6 +87,7 @@ export function FileUpload({ onFileUpload, isLoading }: FileUploadProps) {
           onChange={handleFileSelect}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
           disabled={isLoading}
+          aria-label="Upload CSV file"
         />
       </div>
     </div>

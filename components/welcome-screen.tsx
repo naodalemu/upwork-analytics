@@ -32,7 +32,7 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-4">
                   <TrendingUp className="w-6 h-6 text-green-600" />
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Income Analytics</h3>
+                <h2 className="font-semibold text-gray-900 mb-2">Income Analytics</h2>
                 <p className="text-gray-600 text-sm">
                   Track total earnings, hourly rates, and project performance with interactive visualizations.
                 </p>
@@ -44,7 +44,7 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-4">
                   <BarChart3 className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Visual Reports</h3>
+                <h2 className="font-semibold text-gray-900 mb-2">Visual Reports</h2>
                 <p className="text-gray-600 text-sm">
                   Beautiful charts and graphs that make your financial data easy to understand and analyze.
                 </p>
@@ -56,7 +56,7 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full mb-4">
                   <FileText className="w-6 h-6 text-purple-600" />
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Detailed History</h3>
+                <h2 className="font-semibold text-gray-900 mb-2">Detailed History</h2>
                 <p className="text-gray-600 text-sm">
                   Searchable transaction history with filtering options to dive deep into your data.
                 </p>
@@ -64,13 +64,32 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
             </Card>
           </div>
 
+          {/* Upload Section - Remains in its own Card */}
+          <Card className="border-0 shadow-xl bg-white mb-8">
+            <CardContent className="p-8">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Upload Your Data</h2>
+              <p className="text-gray-600 mb-6">
+                Drag and drop your prepared Upwork CSV file here, or click to select it.
+              </p>
+
+              <FileUpload onFileUpload={onFileUpload} isLoading={isLoading} />
+
+              <div className="mt-6 text-sm text-gray-500">
+                <p className="mb-2">
+                  <strong>Required CSV columns:</strong> Date, Contract, Hours, Amount, Payment type
+                </p>
+                <p>Your data is processed locally in your browser and never sent to any server.</p>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Instructions Section - Now in its own Card */}
-          <Card className="border-0 shadow-xl bg-white mb-8 p-4 sm:p-10">
+          <Card className="border-0 shadow-xl bg-white p-4 sm:p-10">
             {" "}
             {/* Added mb-8 for spacing */}
             <CardHeader>
               <CardTitle className="text-2xl font-semibold text-gray-900">
-                Get Started: Prepare Your Upwork Data
+                Don't Know How To Get Your Upwork Data?
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -170,25 +189,6 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                     </p>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Upload Section - Remains in its own Card */}
-          <Card className="border-0 shadow-xl bg-white">
-            <CardContent className="p-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Upload Your Data</h2>
-              <p className="text-gray-600 mb-6">
-                Drag and drop your prepared Upwork CSV file here, or click to select it.
-              </p>
-
-              <FileUpload onFileUpload={onFileUpload} isLoading={isLoading} />
-
-              <div className="mt-6 text-sm text-gray-500">
-                <p className="mb-2">
-                  <strong>Required CSV columns:</strong> Date, Contract, Hours, Amount, Payment type
-                </p>
-                <p>Your data is processed locally in your browser and never sent to any server.</p>
               </div>
             </CardContent>
           </Card>
