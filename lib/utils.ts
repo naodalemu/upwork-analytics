@@ -19,4 +19,12 @@ export function getWeekNumber(d: Date) {
   return `${d.getUTCFullYear()}-W${String(weekNo).padStart(2, "0")}`
 }
 
-export type TimeGranularity = "monthly" | "weekly" | "daily"
+export type TimeGranularity = "monthly" | "weekly" | "daily" | "quarterly"
+
+// Helper function to get quarter key
+export function getQuarterKey(d: Date) {
+  const year = d.getFullYear()
+  const month = d.getMonth() + 1
+  const quarter = Math.ceil(month / 3)
+  return `${year}-Q${quarter}`
+}

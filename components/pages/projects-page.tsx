@@ -109,6 +109,7 @@ export function ProjectsPage({ data }: ProjectsPageProps) {
               <SelectValue placeholder="Select Range" />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="quarterly">Quarterly</SelectItem>
               <SelectItem value="monthly">Monthly</SelectItem>
               <SelectItem value="weekly">Weekly</SelectItem>
               <SelectItem value="daily">Daily</SelectItem>

@@ -6,6 +6,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { TransactionData } from "@/lib/csv-parser"
 import { getWeekNumber, type TimeGranularity } from "@/lib/utils"
+import { getQuarterKey } from "@/lib/utils"
 
 interface TotalHoursWorkedChartProps {
   data: TransactionData[]
@@ -40,6 +41,8 @@ export function TotalHoursWorkedChart({
         key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`
       } else if (granularity === "weekly") {
         key = getWeekNumber(date)
+      } else if (granularity === "quarterly") {
+        key = getQuarterKey(date)
       } else {
         // daily
         key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
@@ -65,6 +68,9 @@ export function TotalHoursWorkedChart({
           const date = new Date(year, 0, 1 + (week - 1) * 7) // Start of the week
           date.setDate(date.getDate() + ((1 - date.getDay() + 7) % 7)) // Adjust to Monday
           formattedLabel = `Week of ${date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`
+        } else if (granularity === "quarterly") {
+          const [year, quarter] = key.split("-Q")
+          formattedLabel = `${quarter} ${year}`
         } else {
           formattedLabel = new Date(key).toLocaleDateString("en-US", {
             year: "numeric",
@@ -105,6 +111,7 @@ export function TotalHoursWorkedChart({
             <SelectValue placeholder="Select Range" />
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value="quarterly">Quarterly</SelectItem>
             <SelectItem value="monthly">Monthly</SelectItem>
             <SelectItem value="weekly">Weekly</SelectItem>
             <SelectItem value="daily">Daily</SelectItem>

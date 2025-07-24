@@ -30,7 +30,20 @@ export function SeasonalAnalysis({ data }: SeasonalAnalysisProps) {
 
     return Array.from(quarterMap.entries())
       .map(([quarter, income]) => ({ quarter, income }))
-      .sort((a, b) => a.quarter.localeCompare(b.quarter))
+      .sort((a, b) => {
+        // Extract year and quarter for proper chronological sorting
+        const [aQuarter, aYear] = a.quarter.split(" ")
+        const [bQuarter, bYear] = b.quarter.split(" ")
+
+        // First sort by year, then by quarter
+        if (aYear !== bYear) {
+          return Number.parseInt(aYear) - Number.parseInt(bYear)
+        }
+
+        // If same year, sort by quarter (Q1, Q2, Q3, Q4)
+        const quarterOrder = { Q1: 1, Q2: 2, Q3: 3, Q4: 4 }
+        return quarterOrder[aQuarter] - quarterOrder[bQuarter]
+      })
   }, [data])
 
   const CustomTooltip = ({ active, payload, label }: any) => {

@@ -82,6 +82,7 @@ export function TrendsPage({ data }: TrendsPageProps) {
               <SelectValue placeholder="Select Range" />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="quarterly">Quarterly</SelectItem>
               <SelectItem value="monthly">Monthly</SelectItem>
               <SelectItem value="weekly">Weekly</SelectItem>
               <SelectItem value="daily">Daily</SelectItem>
@@ -92,7 +93,6 @@ export function TrendsPage({ data }: TrendsPageProps) {
           </Select>
         </div>
       </div>
-
 
       {/* Income Trend Chart */}
       <div className="mb-8">

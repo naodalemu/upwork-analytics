@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import type { TransactionData } from "@/lib/csv-parser"
-import { getWeekNumber, type TimeGranularity } from "@/lib/utils"
+import { getWeekNumber, getQuarterKey, type TimeGranularity } from "@/lib/utils"
 
 interface IncomeTrendChartProps {
   data: TransactionData[]
@@ -36,6 +36,8 @@ export function IncomeTrendChart({ data, initialGranularity = "monthly", onGranu
         key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`
       } else if (granularity === "weekly") {
         key = getWeekNumber(date)
+      } else if (granularity === "quarterly") {
+        key = getQuarterKey(date)
       } else {
         key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
       }
@@ -56,9 +58,12 @@ export function IncomeTrendChart({ data, initialGranularity = "monthly", onGranu
           const [yearStr, weekStr] = key.split("-W")
           const year = Number.parseInt(yearStr)
           const week = Number.parseInt(weekStr)
-          const date = new Date(year, 0, 1 + (week - 1) * 7) // Start of the week
-          date.setDate(date.getDate() + ((1 - date.getDay() + 7) % 7)) // Adjust to Monday
+          const date = new Date(year, 0, 1 + (week - 1) * 7)
+          date.setDate(date.getDate() + ((1 - date.getDay() + 7) % 7))
           formattedLabel = `Week of ${date.toLocaleDateString("en-US", { month: "short", day: "numeric" })}`
+        } else if (granularity === "quarterly") {
+          const [year, quarter] = key.split("-")
+          formattedLabel = `${quarter} ${year}`
         } else {
           formattedLabel = new Date(key).toLocaleDateString("en-US", {
             year: "numeric",
@@ -99,6 +104,7 @@ export function IncomeTrendChart({ data, initialGranularity = "monthly", onGranu
             <SelectValue placeholder="Select Range" />
           </SelectTrigger>
           <SelectContent>
+            <SelectItem value="quarterly">Quarterly</SelectItem>
             <SelectItem value="monthly">Monthly</SelectItem>
             <SelectItem value="weekly">Weekly</SelectItem>
             <SelectItem value="daily">Daily</SelectItem>
