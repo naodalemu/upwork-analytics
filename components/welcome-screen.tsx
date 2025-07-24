@@ -1,14 +1,39 @@
 "use client"
-import { FileText, BarChart3, TrendingUp, Link, Calendar, Download, Columns, Upload } from "lucide-react"
+import { FileText, BarChart3, TrendingUp, Link, Calendar, Download, Columns, Upload, Sparkles } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card" // Added CardHeader, CardTitle
 import { FileUpload } from "@/components/file-upload"
+import { Button } from "@/components/ui/button"
 
 interface WelcomeScreenProps {
   onFileUpload: (file: File) => void
   isLoading: boolean
 }
 
+
 export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
+  const handleDemoClick = async () => {
+    // Prevent clicking if an upload is already in progress
+    if (isLoading) return
+
+    try {
+      // Fetch the sample file from the public directory
+      const response = await fetch("/sample-data.csv")
+      if (!response.ok) {
+        throw new Error("Network response was not ok.")
+      }
+      // Create a blob from the response
+      const blob = await response.blob()
+      // Create a File object that the onFileUpload function expects
+      const sampleFile = new File([blob], "sample-data.csv", { type: "text/csv" })
+
+      // Call the existing upload function with the sample file
+      onFileUpload(sampleFile)
+    } catch (error) {
+      console.error("Error loading sample data:", error)
+      // You could add a user-facing error message here (e.g., using a toast notification)
+    }
+  }
+  
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4 py-16">
@@ -73,6 +98,32 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
               </p>
 
               <FileUpload onFileUpload={onFileUpload} isLoading={isLoading} />
+
+              <div className="flex items-center my-6">
+                <div className="flex-grow border-t border-gray-200"></div>
+                <span className="flex-shrink mx-4 text-sm text-gray-500">Or</span>
+                <div className="flex-grow border-t border-gray-200"></div>
+              </div>
+
+              <div className="text-center">
+                <Button
+                  onClick={handleDemoClick}
+                  disabled={isLoading}
+                  className="
+                    w-full max-w-md mx-auto px-6 py-3
+                    font-semibold text-white
+                    rounded-lg shadow-md
+                    bg-gradient-to-r from-purple-600 via-blue-500 to-indigo-600 
+                    [background-size:200%]
+                    transition-all duration-500 ease-out hover:[background-position:right]
+                    hover:shadow-xl hover:-translate-y-0.5
+                    disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-md disabled:translate-y-0
+                  "
+                >
+                  <Sparkles className="w-5 h-5 mr-2" />
+                  Try with Sample Data
+                </Button>
+              </div>
 
               <div className="mt-6 text-sm text-gray-500">
                 <p className="mb-2">
