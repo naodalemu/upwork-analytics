@@ -1,3 +1,7 @@
+# Upwork Income Analytics Dashboard 📊
+
+**[🚀 View Live Demo](https://upwork-analytics-alpha.vercel.app/)**
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![GitHub stars](https://img.shields.io/github/stars/naodalemu/upwork-analytics?style=social)](https://github.com/naodalemu/upwork-analytics/stargazers)
 
