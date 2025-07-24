@@ -1,5 +1,5 @@
 "use client"
-import { FileText, BarChart3, TrendingUp, Link, Calendar, Download, Columns, Upload, Sparkles } from "lucide-react"
+import { FileText, BarChart3, TrendingUp, Link, Calendar, Download, Columns, Upload, Sparkles, Loader2 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card" // Added CardHeader, CardTitle
 import { FileUpload } from "@/components/file-upload"
 import { Button } from "@/components/ui/button"
@@ -33,7 +33,7 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
       // You could add a user-facing error message here (e.g., using a toast notification)
     }
   }
-  
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4 py-16">
@@ -120,8 +120,7 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                     disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-md disabled:translate-y-0
                   "
                 >
-                  <Sparkles className="w-5 h-5 mr-2" />
-                  Try with Sample Data
+                  {isLoading ? "Loading..." : <><Sparkles className="w-5 h-5 mr-2" /> Try with Sample Data</>}
                 </Button>
               </div>
 
