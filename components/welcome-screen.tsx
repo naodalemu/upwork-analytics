@@ -1,38 +1,51 @@
-"use client"
-import { FileText, BarChart3, TrendingUp, Link, Calendar, Download, Columns, Upload, Sparkles, Loader2 } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card" // Added CardHeader, CardTitle
-import { FileUpload } from "@/components/file-upload"
-import { Button } from "@/components/ui/button"
+"use client";
+import {
+  FileText,
+  BarChart3,
+  TrendingUp,
+  Link as LinkIcon,
+  Calendar,
+  Download,
+  Columns,
+  Upload,
+  Sparkles,
+  MessageSquare,
+} from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; // Added CardHeader, CardTitle
+import { FileUpload } from "@/components/file-upload";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface WelcomeScreenProps {
-  onFileUpload: (file: File) => void
-  isLoading: boolean
+  onFileUpload: (file: File) => void;
+  isLoading: boolean;
 }
-
 
 export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
   const handleDemoClick = async () => {
     // Prevent clicking if an upload is already in progress
-    if (isLoading) return
+    if (isLoading) return;
 
     try {
       // Fetch the sample file from the public directory
-      const response = await fetch("/sample-data.csv")
+      const response = await fetch("/sample-data.csv");
       if (!response.ok) {
-        throw new Error("Network response was not ok.")
+        throw new Error("Network response was not ok.");
       }
       // Create a blob from the response
-      const blob = await response.blob()
+      const blob = await response.blob();
       // Create a File object that the onFileUpload function expects
-      const sampleFile = new File([blob], "sample-data.csv", { type: "text/csv" })
+      const sampleFile = new File([blob], "sample-data.csv", {
+        type: "text/csv",
+      });
 
       // Call the existing upload function with the sample file
-      onFileUpload(sampleFile)
+      onFileUpload(sampleFile);
     } catch (error) {
-      console.error("Error loading sample data:", error)
+      console.error("Error loading sample data:", error);
       // You could add a user-facing error message here (e.g., using a toast notification)
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
@@ -43,10 +56,13 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
             <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-6">
               <BarChart3 className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Financial Clarity Dashboard</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Financial Clarity Dashboard
+            </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Transform your Upwork transaction data into actionable insights. Upload your CSV file and discover
-              comprehensive analytics about your income performance.
+              Transform your Upwork transaction data into actionable insights.
+              Upload your CSV file and discover comprehensive analytics about
+              your income performance.
             </p>
           </div>
 
@@ -57,9 +73,12 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 rounded-full mb-4">
                   <TrendingUp className="w-6 h-6 text-green-600" />
                 </div>
-                <h2 className="font-semibold text-gray-900 mb-2">Income Analytics</h2>
+                <h2 className="font-semibold text-gray-900 mb-2">
+                  Income Analytics
+                </h2>
                 <p className="text-gray-600 text-sm">
-                  Track total earnings, hourly rates, and project performance with interactive visualizations.
+                  Track total earnings, hourly rates, and project performance
+                  with interactive visualizations.
                 </p>
               </CardContent>
             </Card>
@@ -69,9 +88,12 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-4">
                   <BarChart3 className="w-6 h-6 text-blue-600" />
                 </div>
-                <h2 className="font-semibold text-gray-900 mb-2">Visual Reports</h2>
+                <h2 className="font-semibold text-gray-900 mb-2">
+                  Visual Reports
+                </h2>
                 <p className="text-gray-600 text-sm">
-                  Beautiful charts and graphs that make your financial data easy to understand and analyze.
+                  Beautiful charts and graphs that make your financial data easy
+                  to understand and analyze.
                 </p>
               </CardContent>
             </Card>
@@ -81,9 +103,12 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                 <div className="inline-flex items-center justify-center w-12 h-12 bg-purple-100 rounded-full mb-4">
                   <FileText className="w-6 h-6 text-purple-600" />
                 </div>
-                <h2 className="font-semibold text-gray-900 mb-2">Detailed History</h2>
+                <h2 className="font-semibold text-gray-900 mb-2">
+                  Detailed History
+                </h2>
                 <p className="text-gray-600 text-sm">
-                  Searchable transaction history with filtering options to dive deep into your data.
+                  Searchable transaction history with filtering options to dive
+                  deep into your data.
                 </p>
               </CardContent>
             </Card>
@@ -92,16 +117,21 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
           {/* Upload Section - Remains in its own Card */}
           <Card className="border-0 shadow-xl bg-white mb-8">
             <CardContent className="p-8">
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">Upload Your Data</h2>
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                Upload Your Data
+              </h2>
               <p className="text-gray-600 mb-6">
-                Drag and drop your prepared Upwork CSV file here, or click to select it.
+                Drag and drop your prepared Upwork CSV file here, or click to
+                select it.
               </p>
 
               <FileUpload onFileUpload={onFileUpload} isLoading={isLoading} />
 
               <div className="flex items-center my-6">
                 <div className="flex-grow border-t border-gray-200"></div>
-                <span className="flex-shrink mx-4 text-sm text-gray-500">Or</span>
+                <span className="flex-shrink mx-4 text-sm text-gray-500">
+                  Or
+                </span>
                 <div className="flex-grow border-t border-gray-200"></div>
               </div>
 
@@ -120,15 +150,25 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                     disabled:opacity-50 disabled:cursor-not-allowed disabled:shadow-md disabled:translate-y-0
                   "
                 >
-                  {isLoading ? "Loading..." : <><Sparkles className="w-5 h-5 mr-2" /> Try with Sample Data</>}
+                  {isLoading ? (
+                    "Loading..."
+                  ) : (
+                    <>
+                      <Sparkles className="w-5 h-5 mr-2" /> Try with Sample Data
+                    </>
+                  )}
                 </Button>
               </div>
 
               <div className="mt-6 text-sm text-gray-500">
                 <p className="mb-2">
-                  <strong>Required CSV columns:</strong> Date, Contract, Hours, Amount, Payment type
+                  <strong>Required CSV columns:</strong> Date, Contract, Hours,
+                  Amount, Payment type
                 </p>
-                <p>Your data is processed locally in your browser and never sent to any server.</p>
+                <p>
+                  Your data is processed locally in your browser and never sent
+                  to any server.
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -144,17 +184,20 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
             </CardHeader>
             <CardContent>
               <p className="text-gray-600 mb-8">
-                Follow these steps to export and prepare your Upwork weekly summary CSV file for analysis:
+                Follow these steps to export and prepare your Upwork weekly
+                summary CSV file for analysis:
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 text-left pt-2 sm:pt-5">
                 {/* Step 1 */}
                 <div className="flex items-start space-x-4">
                   <div className="inline-flex items-center justify-center w-10 h-10 bg-blue-100 rounded-full flex-shrink-0">
-                    <Link className="w-5 h-5 text-blue-600" />
+                    <LinkIcon className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">1. Go to Upwork Reports</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">
+                      1. Go to Upwork Reports
+                    </h3>
                     <p className="text-gray-600 text-sm">
                       Navigate to{" "}
                       <a
@@ -176,9 +219,12 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                     <FileText className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">2. Select "Weekly Summary"</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">
+                      2. Select "Weekly Summary"
+                    </h3>
                     <p className="text-gray-600 text-sm">
-                      On the reports page, find and click on the "Weekly Summary" option.
+                      On the reports page, find and click on the "Weekly
+                      Summary" option.
                     </p>
                   </div>
                 </div>
@@ -189,10 +235,12 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                     <Calendar className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">3. Choose Your Date Range</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">
+                      3. Choose Your Date Range
+                    </h3>
                     <p className="text-gray-600 text-sm">
-                      Select the period you want to analyze. Note that Upwork typically limits exports to a maximum of 1
-                      year per file.
+                      Select the period you want to analyze. Note that Upwork
+                      typically limits exports to a maximum of 1 year per file.
                     </p>
                   </div>
                 </div>
@@ -203,10 +251,14 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                     <Download className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">4. Export Multiple Files (if needed)</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">
+                      4. Export Multiple Files (if needed)
+                    </h3>
                     <p className="text-gray-600 text-sm">
-                      If your payment history exceeds one year, export multiple CSVs. For example, for Oct 5, 2023 - Jul
-                      10, 2025, export Oct 1, 2023 - Oct 4, 2024, then Oct 5, 2024 - Jul 10, 2025.
+                      If your payment history exceeds one year, export multiple
+                      CSVs. For example, for Oct 5, 2023 - Jul 10, 2025, export
+                      Oct 1, 2023 - Oct 4, 2024, then Oct 5, 2024 - Jul 10,
+                      2025.
                     </p>
                   </div>
                 </div>
@@ -217,11 +269,15 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                     <Columns className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">5. Combine Your CSVs</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">
+                      5. Combine Your CSVs
+                    </h3>
                     <p className="text-gray-600 text-sm">
-                      Open all exported CSVs in a spreadsheet editor. Copy the content (excluding headers) from the
-                      second and subsequent files, and paste it into the first file, directly below its data. Ensure the
-                      first file retains its header row. Save this combined file.
+                      Open all exported CSVs in a spreadsheet editor. Copy the
+                      content (excluding headers) from the second and subsequent
+                      files, and paste it into the first file, directly below
+                      its data. Ensure the first file retains its header row.
+                      Save this combined file.
                     </p>
                   </div>
                 </div>
@@ -232,18 +288,39 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                     <Upload className="w-5 h-5 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">6. Upload Your File</h3>
+                    <h3 className="font-semibold text-gray-900 mb-1">
+                      6. Upload Your File
+                    </h3>
                     <p className="text-gray-600 text-sm">
-                      Drag and drop your combined CSV file into the area below, or click the button to browse and select
-                      it.
+                      Drag and drop your combined CSV file into the area below,
+                      or click the button to browse and select it.
                     </p>
                   </div>
                 </div>
               </div>
             </CardContent>
           </Card>
+
+          <div className="mt-16 text-center text-gray-600">
+            <p className="mb-4">
+              Have a question, suggestion, or just want to say hi?
+            </p>
+            <Link href="/contact">
+              <Button
+                variant="outline"
+                className="w-full max-w-xs mx-auto px-6 py-3
+                font-semibold text-white bg-blue-600 rounded-lg shadow-md
+                hover:bg-blue-700
+                transition-colors duration-300
+                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 group hover:text-gray-200"
+              >
+                <MessageSquare className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:rotate-12" />
+                Contact Us
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
