@@ -478,7 +478,7 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-1">
-                  Select "Weekly Summary
+                  Select "Weekly Summary"
                 </h3>
                 <p className="text-gray-600">
                   On the reports page, find and click on the "Weekly Summary"
