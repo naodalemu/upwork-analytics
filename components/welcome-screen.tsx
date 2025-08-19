@@ -123,6 +123,7 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
             <div className="flex items-center space-x-4">
               <a
                 href="https://naodalemu.lemonsqueezy.com/buy/ebfeaf68-6feb-4676-ad7e-196f9ed83642"
+                target="_blank"
                 className="lemonsqueezy-button group inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-semibold text-white transition-all duration-300 bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 [background-size:200%] hover:[background-position:right] focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
               >
                 <Heart className="mr-2 h-4 w-4 transition-transform group-hover:scale-110" />
@@ -134,7 +135,10 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative bg-gray-50 py-20 overflow-hidden">
+      <section
+        className="relative bg-gray-50 py-20 overflow-hidden"
+        id="file-upload-box"
+      >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight">
@@ -150,17 +154,17 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button
                 onClick={() => handleScrollTo("instruction-section")}
+                variant="outline"
                 size="lg"
-                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md"
+                className="px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-md hover:border-gray-400"
               >
                 Analyze My Earnings
               </Button>
               <Button
                 onClick={handleDemoClick}
                 disabled={isLoading}
-                variant="outline"
                 size="lg"
-                className="px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-md hover:border-gray-400"
+                className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md"
               >
                 {isLoading ? (
                   "Loading Demo..."
@@ -172,7 +176,7 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
               </Button>
             </div>
 
-            {/* Dashboard Cards Mockup */}
+            {/* Dashboard Cards Mockup
             <div className="relative max-w-2xl mx-auto">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -189,6 +193,13 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                   </div>
                 </div>
                 <div className="h-64"></div>
+              </div>
+            </div> */}
+
+            {/* File Upload Section */}
+            <div className="container mx-auto px-4">
+              <div className="max-w-2xl mx-auto">
+                <FileUpload onFileUpload={onFileUpload} isLoading={isLoading} />
               </div>
             </div>
           </div>
@@ -535,20 +546,17 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                   Upload Your File
                 </h3>
                 <p className="text-gray-600">
-                  Drag and drop your combined CSV file into the area below, or
-                  click the button to browse and select it.
+                  Drag and drop your combined CSV file into the area at the{" "}
+                  <a
+                    className="text-blue-600 font-medium hover:underline"
+                    href="#file-upload-box"
+                  >
+                    top
+                  </a>
+                  , or click the button to browse and select it.
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* File Upload Section */}
-      <section id="upload-section" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            <FileUpload onFileUpload={onFileUpload} isLoading={isLoading} />
           </div>
         </div>
       </section>
