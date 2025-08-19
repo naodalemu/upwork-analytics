@@ -158,7 +158,7 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
                 size="lg"
                 className="px-8 py-4 border-2 border-gray-300 text-gray-700 font-semibold rounded-md hover:border-gray-400"
               >
-                Analyze My Earnings
+                I Don't Know How
               </Button>
               <Button
                 onClick={handleDemoClick}
