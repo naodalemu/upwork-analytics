@@ -59,14 +59,11 @@ export function Instructions() {
   return (
     <section id="instruction-section" className="bg-background px-4 py-20 sm:py-28">
       <div className="container mx-auto max-w-3xl">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 pb-14 sm:pb-20 text-center sm:text-left">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-center gap-4 pb-14 sm:pb-20 text-center sm:text-left">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mx-auto sm:mx-0">
             <span className="text-foreground">Don't know how</span>{" "}
             <span className="text-muted-foreground">to get your data?</span>
           </h2>
-          <p className="text-sm text-muted-foreground max-w-xs mx-auto sm:mx-0">
-            Six steps, one CSV, no guesswork.
-          </p>
         </div>
 
         <div className="relative">
