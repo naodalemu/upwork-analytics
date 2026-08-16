@@ -14,7 +14,7 @@ export function AnalyticsPage({ data }: AnalyticsPageProps) {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">Advanced Analytics</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-6">Advanced Analytics</h2>
         <PerformanceMetrics data={data} />
       </div>
 

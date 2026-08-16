@@ -54,7 +54,7 @@ export function FileUpload({ onFileUpload, isLoading }: FileUploadProps) {
       <div
         className={`
           border-2 border-dashed rounded-lg p-8 text-center transition-colors relative
-          ${isDragOver ? "border-blue-500 bg-blue-50" : "border-gray-300 hover:border-gray-400"}
+          ${isDragOver ? "border-blue-500 bg-blue-50 dark:bg-blue-950/30" : "border-border hover:border-muted-foreground"}
           ${isLoading ? "pointer-events-none opacity-50" : "cursor-pointer"}
         `}
         onDragOver={handleDragOver}
@@ -63,21 +63,21 @@ export function FileUpload({ onFileUpload, isLoading }: FileUploadProps) {
       >
         {isLoading ? (
           <div className="flex flex-col items-center">
-            <Loader2 className="w-12 h-12 text-blue-600 animate-spin mb-4" />
-            <p className="text-gray-600">Processing your file...</p>
+            <Loader2 className="w-12 h-12 text-blue-600 dark:text-blue-400 animate-spin mb-4" />
+            <p className="text-muted-foreground">Processing your file...</p>
           </div>
         ) : (
           <div className="flex flex-col items-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
-              <Upload className="w-8 h-8 text-gray-600" />
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-muted rounded-full mb-4">
+              <Upload className="w-8 h-8 text-muted-foreground" />
             </div>
-            <p className="text-lg font-medium text-gray-900 mb-2">Drop your CSV file here</p>
-            <p className="text-gray-600 mb-4">or click to browse</p>
+            <p className="text-lg font-medium text-foreground mb-2">Drop your CSV file here</p>
+            <p className="text-muted-foreground mb-4">or click to browse</p>
             <Button variant="outline" className="mb-2 bg-transparent">
               <FileText className="w-4 h-4 mr-2" />
               Choose File
             </Button>
-            <p className="text-xs text-gray-500">Supports CSV files only</p>
+            <p className="text-xs text-muted-foreground">Supports CSV files only</p>
           </div>
         )}
 

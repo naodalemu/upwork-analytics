@@ -35,13 +35,13 @@ export function ContactUs() {
 
   const contactLinks = [
     {
-      icon: <Github className="w-5 h-5 text-gray-700" />,
+      icon: <Github className="w-5 h-5 text-muted-foreground" />,
       label: "GitHub",
       description: "Source code & contributions",
       href: "https://github.com/naodalemu/upwork-analytics",
     },
     {
-      icon: <FaXTwitter className="w-5 h-5 text-gray-700" />,
+      icon: <FaXTwitter className="w-5 h-5 text-muted-foreground" />,
       label: "X/Twitter",
       description: "Announcements & updates",
       href: "https://x.com/naod_alemu",
@@ -94,16 +94,16 @@ export function ContactUs() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-background dark:to-background flex items-center justify-center p-4">
       <Card className="w-full max-w-4xl shadow-xl overflow-hidden">
         <div className="grid md:grid-cols-2">
           {/* Left Column: Form */}
-          <div className="p-8 bg-white">
+          <div className="p-8 bg-card">
             <CardHeader className="p-0 mb-6">
-              <CardTitle className="text-3xl font-bold text-gray-900">
+              <CardTitle className="text-3xl font-bold text-foreground">
                 Send a Message
               </CardTitle>
-              <CardDescription className="text-gray-600 pt-2">
+              <CardDescription className="text-muted-foreground pt-2">
                 Have a question or suggestion? Fill out the form below.
               </CardDescription>
             </CardHeader>
@@ -112,7 +112,7 @@ export function ContactUs() {
                 <div className="space-y-2">
                   <label
                     htmlFor="user_name"
-                    className="text-sm font-medium text-gray-700"
+                    className="text-sm font-medium text-muted-foreground"
                   >
                     Name (Optional)
                   </label>
@@ -121,13 +121,13 @@ export function ContactUs() {
                     name="user_name"
                     id="user_name"
                     placeholder="Your Name"
-                    className="bg-slate-100 border-slate-200"
+                    className="bg-muted border-border"
                   />
                 </div>
                 <div className="space-y-2">
                   <label
                     htmlFor="user_email"
-                    className="text-sm font-medium text-gray-700"
+                    className="text-sm font-medium text-muted-foreground"
                   >
                     Email (Optional)
                   </label>
@@ -136,13 +136,13 @@ export function ContactUs() {
                     name="user_email"
                     id="user_email"
                     placeholder="your@email.com"
-                    className="bg-slate-100 border-slate-200"
+                    className="bg-muted border-border"
                   />
                 </div>
                 <div className="space-y-2">
                   <label
                     htmlFor="message"
-                    className="text-sm font-medium text-gray-700"
+                    className="text-sm font-medium text-muted-foreground"
                   >
                     Message (Required)
                   </label>
@@ -152,7 +152,7 @@ export function ContactUs() {
                     placeholder="I have a suggestion for..."
                     required
                     rows={5}
-                    className="bg-slate-100 border-slate-200"
+                    className="bg-muted border-border"
                   />
                 </div>
                 <div>
@@ -184,12 +184,12 @@ export function ContactUs() {
           </div>
 
           {/* Right Column: Other Links */}
-          <div className="p-8 bg-slate-50 border-l border-slate-200">
+          <div className="p-8 bg-muted/50 border-l border-border">
             <CardHeader className="p-0 mb-6">
-              <CardTitle className="text-2xl font-bold text-gray-900">
+              <CardTitle className="text-2xl font-bold text-foreground">
                 Other Ways to Reach Out
               </CardTitle>
-              <CardDescription className="text-gray-600 pt-2">
+              <CardDescription className="text-muted-foreground pt-2">
                 Connect with me on other platforms.
               </CardDescription>
             </CardHeader>
@@ -200,14 +200,14 @@ export function ContactUs() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center p-4 border border-slate-200 bg-white rounded-lg hover:bg-slate-100 hover:border-slate-300 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="flex items-center p-4 border border-border bg-card rounded-lg hover:bg-muted hover:border-muted-foreground/50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center">
                     {link.icon}
                   </div>
                   <div className="ml-4">
-                    <p className="font-semibold text-gray-800">{link.label}</p>
-                    <p className="text-sm text-gray-500">{link.description}</p>
+                    <p className="font-semibold text-foreground">{link.label}</p>
+                    <p className="text-sm text-muted-foreground">{link.description}</p>
                   </div>
                 </a>
               ))}
@@ -215,7 +215,7 @@ export function ContactUs() {
           </div>
         </div>
 
-        <CardFooter className="flex justify-center pt-6 bg-white border-t">
+        <CardFooter className="flex justify-center pt-6 bg-card border-t">
           <Link href="/">
             <Button variant="outline">
               <ArrowLeft className="w-4 h-4 mr-2" />

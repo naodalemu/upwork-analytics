@@ -40,14 +40,14 @@ export function ProductivityAnalytics({ data }: ProductivityAnalyticsProps) {
     if (active && payload && payload.length) {
       const data = payload[0].payload
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-medium text-gray-900 mb-1">Session Length: {data.range}</p>
-          <p className="text-green-600">
+        <div className="bg-popover text-popover-foreground p-3 border border-border rounded-lg shadow-lg">
+          <p className="font-medium text-foreground mb-1">Session Length: {data.range}</p>
+          <p className="text-green-600 dark:text-green-400">
             Total Income: $
             {data.totalIncome.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
-          <p className="text-blue-600">Transactions: {data.transactions}</p>
-          <p className="text-purple-600">
+          <p className="text-blue-600 dark:text-blue-400">Transactions: {data.transactions}</p>
+          <p className="text-purple-600 dark:text-purple-400">
             Avg Hourly Rate: $
             {data.avgRate.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
@@ -66,9 +66,12 @@ export function ProductivityAnalytics({ data }: ProductivityAnalyticsProps) {
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={productivityData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="range" tick={{ fontSize: 12 }} />
-              <YAxis tick={{ fontSize: 12 }} tickFormatter={(value) => `$${value.toFixed(0)}`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis dataKey="range" tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }} />
+              <YAxis
+                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+                tickFormatter={(value) => `$${value.toFixed(0)}`}
+              />
               <Tooltip content={<CustomTooltip />} />
               <Bar dataKey="avgRate" fill="#10B981" name="avgRate" />
             </BarChart>

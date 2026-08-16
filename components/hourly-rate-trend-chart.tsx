@@ -90,9 +90,9 @@ export function HourlyRateTrendChart({
     if (active && payload && payload.length) {
       const data = payload[0].payload
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-medium text-gray-900 mb-1">{data.label}</p>
-          <p className="text-purple-600 font-semibold">
+        <div className="bg-popover text-popover-foreground p-3 border border-border rounded-lg shadow-lg">
+          <p className="font-medium text-foreground mb-1">{data.label}</p>
+          <p className="text-purple-600 dark:text-purple-400 font-semibold">
             Hourly Rate: $
             {data.hourlyRate.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
@@ -122,9 +122,18 @@ export function HourlyRateTrendChart({
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={processedData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="label" tick={{ fontSize: 12 }} angle={-45} textAnchor="end" height={60} />
-              <YAxis tick={{ fontSize: 12 }} tickFormatter={(value) => `$${value.toFixed(0)}`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis
+                dataKey="label"
+                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+                angle={-45}
+                textAnchor="end"
+                height={60}
+              />
+              <YAxis
+                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+                tickFormatter={(value) => `$${value.toFixed(0)}`}
+              />
               <Tooltip content={<CustomTooltip />} />
               <Line
                 type="monotone"

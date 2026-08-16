@@ -20,13 +20,13 @@ export function Navbar() {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm shadow-sm">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo / Home Link */}
           <Link
             href="/"
-            className="flex items-center space-x-2 text-xl font-bold text-gray-900"
+            className="flex items-center space-x-2 text-xl font-bold text-foreground"
           >
             <img src="/logo.png" alt="" className="h-10" />
             <span>Upwrok Analytics</span>
@@ -70,7 +70,7 @@ export function Navbar() {
                       key={link.href}
                       href={link.href}
                       target={link.label === "GitHub" ? "_blank" : "_self"}
-                      className="flex items-center space-x-3 text-lg font-medium text-gray-800 hover:text-blue-600"
+                      className="flex items-center space-x-3 text-lg font-medium text-foreground hover:text-blue-600 dark:hover:text-blue-400"
                     >
                       {link.icon}
                       <span>{link.label}</span>

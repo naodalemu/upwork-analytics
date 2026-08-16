@@ -14,10 +14,12 @@ import { DashboardNavigation } from "@/components/dashboard-navigation";
 import { OverviewPage } from "@/components/pages/overview-page";
 import { ProjectsPage } from "@/components/pages/projects-page";
 import { TrendsPage } from "@/components/pages/trends-page";
+import { ProductivityPage } from "@/components/pages/productivity-page";
 import { AnalyticsPage } from "@/components/pages/analytics-page";
 import { TransactionsPage } from "@/components/pages/transactions-page";
-import { filterDataByDateRange, type TransactionData } from "@/lib/csv-parser";
+import { filterDataByDateRange, getEffectiveDateRange, type TransactionData } from "@/lib/csv-parser";
 import { DateRangePicker } from "@/components/date-range-picker";
+import { ThemeToggle } from "@/components/theme-toggle";
 import type { DateRange } from "react-day-picker";
 import Link from "next/link";
 
@@ -39,6 +41,11 @@ export function Dashboard({ data, onReset }: DashboardProps) {
     }
     return filterDataByDateRange(data, dateFilter);
   }, [data, dateFilter, customDateRange]);
+
+  const effectiveDateRange = useMemo(
+    () => getEffectiveDateRange(data, dateFilter, customDateRange),
+    [data, dateFilter, customDateRange]
+  );
 
   const handlePredefinedDateChange = (value: string) => {
     setDateFilter(value);
@@ -62,6 +69,8 @@ export function Dashboard({ data, onReset }: DashboardProps) {
         return <ProjectsPage data={filteredData} />;
       case "trends":
         return <TrendsPage data={filteredData} />;
+      case "productivity":
+        return <ProductivityPage data={filteredData} dateRange={effectiveDateRange} />;
       case "analytics":
         return <AnalyticsPage data={filteredData} />;
       case "transactions":
@@ -72,9 +81,9 @@ export function Dashboard({ data, onReset }: DashboardProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-background">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white dark:bg-card border-b border-gray-200 dark:border-border">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -82,16 +91,16 @@ export function Dashboard({ data, onReset }: DashboardProps) {
                 variant="ghost"
                 size="sm"
                 onClick={onReset}
-                className="text-gray-600 hover:text-gray-900"
+                className="text-gray-600 hover:text-gray-900 dark:text-muted-foreground dark:hover:text-foreground"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Upload
               </Button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-foreground">
                   Financial Dashboard
                 </h1>
-                <p className="text-gray-600">
+                <p className="text-gray-600 dark:text-muted-foreground">
                   Analyzing {data.length} transactions
                 </p>
               </div>
@@ -99,7 +108,7 @@ export function Dashboard({ data, onReset }: DashboardProps) {
 
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <Calendar className="w-4 h-4 text-gray-500" />
+                <Calendar className="w-4 h-4 text-gray-500 dark:text-muted-foreground" />
                 <Select
                   value={dateFilter}
                   onValueChange={handlePredefinedDateChange}
@@ -153,6 +162,7 @@ export function Dashboard({ data, onReset }: DashboardProps) {
                   Contact Us
                 </Button>
               </Link>
+              <ThemeToggle />
             </div>
           </div>
         </div>

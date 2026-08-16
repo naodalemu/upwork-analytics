@@ -50,12 +50,12 @@ export function IncomeByProjectCharts({ data }: IncomeByProjectChartsProps) {
     if (active && payload && payload.length) {
       const data = payload[0].payload
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-medium text-gray-900">{data.name}</p>
-          <p className="text-green-600">
+        <div className="bg-popover text-popover-foreground p-3 border border-border rounded-lg shadow-lg">
+          <p className="font-medium text-foreground">{data.name}</p>
+          <p className="text-green-600 dark:text-green-400">
             ${data.value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
-          {data.percentage && <p className="text-gray-600 text-sm">{data.percentage}% of total</p>}
+          {data.percentage && <p className="text-muted-foreground text-sm">{data.percentage}% of total</p>}
         </div>
       )
     }
@@ -64,7 +64,7 @@ export function IncomeByProjectCharts({ data }: IncomeByProjectChartsProps) {
 
   return (
     <div>
-      <h2 className="text-xl font-semibold text-gray-900 mb-4">Top Earning Contracts</h2>
+      <h2 className="text-xl font-semibold text-foreground mb-4">Top Earning Contracts</h2>
       <div className="max-w-2xl mx-auto">
         {" "}
         {/* Simplified layout as only donut chart remains */}

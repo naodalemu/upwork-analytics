@@ -33,12 +33,12 @@ export function PaymentTypeDistribution({ data }: PaymentTypeDistributionProps) 
     if (active && payload && payload.length) {
       const data = payload[0].payload
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-medium text-gray-900 mb-1">Payment Type: {data.type}</p>
-          <p className="text-green-600">
+        <div className="bg-popover text-popover-foreground p-3 border border-border rounded-lg shadow-lg">
+          <p className="font-medium text-foreground mb-1">Payment Type: {data.type}</p>
+          <p className="text-green-600 dark:text-green-400">
             Total Amount: ${data.amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
-          <p className="text-gray-600">Percentage: {data.percentage}%</p>
+          <p className="text-muted-foreground">Percentage: {data.percentage}%</p>
         </div>
       )
     }

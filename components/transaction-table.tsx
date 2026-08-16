@@ -76,25 +76,25 @@ export function TransactionTable({ data }: TransactionTableProps) {
   const getPaymentTypeBadgeColor = (paymentType: string) => {
     switch (paymentType.toLowerCase()) {
       case "bonus":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-green-800 dark:bg-green-950/40 dark:text-green-400"
       case "hourly":
-        return "bg-blue-100 text-blue-800"
+        return "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-400"
       case "fixed":
-        return "bg-purple-100 text-purple-800"
+        return "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-400"
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-muted text-foreground"
     }
   }
 
   return (
     <div>
-      <h2 className="text-xl font-semibold text-gray-900 mb-4">The Details</h2>
+      <h2 className="text-xl font-semibold text-foreground mb-4">The Details</h2>
       <Card className="border-0 shadow-sm">
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">Transaction History</CardTitle>
             <div className="relative w-64">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
               <Input
                 placeholder="Search transactions..."
                 value={searchTerm}
@@ -180,12 +180,12 @@ export function TransactionTable({ data }: TransactionTableProps) {
           </div>
 
           {paginatedData.length === 0 && (
-            <div className="text-center py-8 text-gray-500">No transactions found matching your search.</div>
+            <div className="text-center py-8 text-muted-foreground">No transactions found matching your search.</div>
           )}
 
           {totalPages > 1 && (
             <div className="flex items-center justify-between mt-4">
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-muted-foreground">
                 Showing {(currentPage - 1) * itemsPerPage + 1} to {Math.min(currentPage * itemsPerPage, totalItems)} of{" "}
                 {totalItems} transactions
               </div>
@@ -199,7 +199,7 @@ export function TransactionTable({ data }: TransactionTableProps) {
                   <ChevronLeft className="w-4 h-4" />
                   Previous
                 </Button>
-                <span className="text-sm text-gray-600">
+                <span className="text-sm text-muted-foreground">
                   Page {currentPage} of {totalPages}
                 </span>
                 <Button

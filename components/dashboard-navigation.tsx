@@ -1,6 +1,6 @@
 "use client"
 
-import { BarChart3, Briefcase, TrendingUp, PieChart, FileText } from "lucide-react"
+import { BarChart3, Briefcase, TrendingUp, PieChart, FileText, Activity } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface DashboardNavigationProps {
@@ -12,13 +12,14 @@ const navigationItems = [
   { id: "overview", label: "Overview", icon: BarChart3 },
   { id: "projects", label: "Projects", icon: Briefcase },
   { id: "trends", label: "Trends", icon: TrendingUp },
+  { id: "productivity", label: "Productivity", icon: Activity },
   { id: "analytics", label: "Analytics", icon: PieChart },
   { id: "transactions", label: "Transactions", icon: FileText },
 ]
 
 export function DashboardNavigation({ currentPage, onPageChange }: DashboardNavigationProps) {
   return (
-    <div className="bg-white border-b border-gray-200">
+    <div className="bg-card border-b border-border">
       <div className="container mx-auto px-4">
         <nav className="flex space-x-8">
           {navigationItems.map((item) => (
@@ -30,8 +31,8 @@ export function DashboardNavigation({ currentPage, onPageChange }: DashboardNavi
                 flex items-center space-x-2 px-3 py-4 border-b-2 transition-colors
                 ${
                   currentPage === item.id
-                    ? "border-blue-500 text-blue-600"
-                    : "border-transparent text-gray-600 hover:text-gray-900"
+                    ? "border-blue-500 text-blue-600 dark:text-blue-400"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
                 }
               `}
             >

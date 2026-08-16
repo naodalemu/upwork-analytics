@@ -93,16 +93,16 @@ export function IncomeHourlyRateComparisonChart({
       const hourlyRateData = payload.find((p: any) => p.dataKey === "hourlyRate")
 
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-medium text-gray-900 mb-1">{label}</p>
+        <div className="bg-popover text-popover-foreground p-3 border border-border rounded-lg shadow-lg">
+          <p className="font-medium text-foreground mb-1">{label}</p>
           {incomeData && (
-            <p className="text-green-600">
+            <p className="text-green-600 dark:text-green-400">
               Income: $
               {incomeData.value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
           )}
           {hourlyRateData && (
-            <p className="text-purple-600">
+            <p className="text-purple-600 dark:text-purple-400">
               Hourly Rate: $
               {hourlyRateData.value.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
@@ -133,18 +133,24 @@ export function IncomeHourlyRateComparisonChart({
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={comparisonData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="label" tick={{ fontSize: 12 }} angle={-45} textAnchor="end" height={60} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis
+                dataKey="label"
+                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+                angle={-45}
+                textAnchor="end"
+                height={60}
+              />
               <YAxis
                 yAxisId="left"
-                tick={{ fontSize: 12 }}
+                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
                 tickFormatter={(value) => `$${value.toLocaleString()}`}
                 label={{ value: "Income", angle: -90, position: "insideLeft", style: { textAnchor: "middle" } }}
               />
               <YAxis
                 yAxisId="right"
                 orientation="right"
-                tick={{ fontSize: 12 }}
+                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
                 tickFormatter={(value) => `$${value.toFixed(0)}`}
                 label={{ value: "Hourly Rate", angle: 90, position: "insideRight", style: { textAnchor: "middle" } }}
               />

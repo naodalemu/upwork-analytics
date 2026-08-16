@@ -74,9 +74,9 @@ export function TrendsPage({ data }: TrendsPageProps) {
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-900">Income & Performance Trends</h2>
+        <h2 className="text-2xl font-bold text-foreground">Income & Performance Trends</h2>
         <div className="flex items-center space-x-2">
-          <span className="text-gray-600 text-sm">Granularity:</span>
+          <span className="text-muted-foreground text-sm">Granularity:</span>
           <Select value={currentGlobalGranularityDisplay} onValueChange={handleGlobalGranularityChange}>
             <SelectTrigger className="w-[120px]">
               <SelectValue placeholder="Select Range" />

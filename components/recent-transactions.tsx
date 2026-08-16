@@ -14,13 +14,13 @@ export function RecentTransactions({ data }: RecentTransactionsProps) {
   const getPaymentTypeBadgeColor = (paymentType: string) => {
     switch (paymentType.toLowerCase()) {
       case "bonus":
-        return "bg-green-100 text-green-800"
+        return "bg-green-100 text-green-800 dark:bg-green-950/40 dark:text-green-400"
       case "hourly":
-        return "bg-blue-100 text-blue-800"
+        return "bg-blue-100 text-blue-800 dark:bg-blue-950/40 dark:text-blue-400"
       case "fixed":
-        return "bg-purple-100 text-purple-800"
+        return "bg-purple-100 text-purple-800 dark:bg-purple-950/40 dark:text-purple-400"
       default:
-        return "bg-gray-100 text-gray-800"
+        return "bg-muted text-foreground"
     }
   }
 
@@ -32,10 +32,10 @@ export function RecentTransactions({ data }: RecentTransactionsProps) {
       <CardContent>
         <div className="space-y-4">
           {recentTransactions.map((transaction, index) => (
-            <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+            <div key={index} className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
               <div className="flex-1">
-                <p className="font-medium text-gray-900 truncate">{transaction.contract}</p>
-                <p className="text-sm text-gray-600">
+                <p className="font-medium text-foreground truncate">{transaction.contract}</p>
+                <p className="text-sm text-muted-foreground">
                   {new Date(transaction.date).toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "short",

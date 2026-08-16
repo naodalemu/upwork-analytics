@@ -25,6 +25,15 @@ export function DateRangePicker({ className, date, setDate }: DateRangePickerPro
   const [calendarMonth, setCalendarMonth] = useState(date?.from || new Date())
   const endDateInputRef = useRef<HTMLInputElement>(null)
 
+  // Keep the manual input fields in sync with whatever range is actually applied
+  // (e.g. picked on the calendar, or reset to "All Time" from the fixed selector),
+  // so the Clear button always has something real to clear.
+  useEffect(() => {
+    setStartDateInput(date?.from ? format(date.from, "MMM dd, yyyy") : "")
+    setEndDateInput(date?.to ? format(date.to, "MMM dd, yyyy") : "")
+    setInputError("")
+  }, [date])
+
   const parseDate = (dateString: string): Date | null => {
     if (!dateString.trim()) return null
 
@@ -95,6 +104,7 @@ export function DateRangePicker({ className, date, setDate }: DateRangePickerPro
     setStartDateInput("")
     setEndDateInput("")
     setInputError("")
+    setDate(undefined)
   }
 
   return (
@@ -133,11 +143,11 @@ export function DateRangePicker({ className, date, setDate }: DateRangePickerPro
 
           {/* Manual Date Input Section */}
           <div className="border-t p-4 space-y-4">
-            <div className="text-sm font-medium text-gray-700 mb-2">Or enter dates manually:</div>
+            <div className="text-sm font-medium text-foreground mb-2">Or enter dates manually:</div>
 
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1">
-                <Label htmlFor="start-date" className="text-xs text-gray-600">
+                <Label htmlFor="start-date" className="text-xs text-muted-foreground">
                   Start Date
                 </Label>
                 <Input
@@ -156,7 +166,7 @@ export function DateRangePicker({ className, date, setDate }: DateRangePickerPro
               </div>
 
               <div className="space-y-1">
-                <Label htmlFor="end-date" className="text-xs text-gray-600">
+                <Label htmlFor="end-date" className="text-xs text-muted-foreground">
                   End Date
                 </Label>
                 <Input
@@ -180,7 +190,7 @@ export function DateRangePicker({ className, date, setDate }: DateRangePickerPro
               </div>
             </div>
 
-            {inputError && <div className="text-xs text-red-600 mt-1">{inputError}</div>}
+            {inputError && <div className="text-xs text-red-600 dark:text-red-400 mt-1">{inputError}</div>}
 
             <div className="flex gap-2">
               <Button size="sm" onClick={handleApplyManualDates} disabled={!startDateInput} className="flex-1">
@@ -191,7 +201,7 @@ export function DateRangePicker({ className, date, setDate }: DateRangePickerPro
               </Button>
             </div>
 
-            <div className="text-xs text-gray-500 mt-2">Supported formats: Jul 20, 2016 • 07/20/2016 • 2016-07-20</div>
+            <div className="text-xs text-muted-foreground mt-2">Supported formats: Jul 20, 2016 • 07/20/2016 • 2016-07-20</div>
           </div>
         </PopoverContent>
       </Popover>

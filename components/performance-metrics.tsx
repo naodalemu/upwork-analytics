@@ -49,29 +49,29 @@ export function PerformanceMetrics({ data }: PerformanceMetricsProps) {
       title: "Income Growth",
       value: `${metrics.incomeGrowth >= 0 ? "+" : ""}${metrics.incomeGrowth.toFixed(1)}%`,
       icon: metrics.incomeGrowth >= 0 ? TrendingUp : TrendingDown,
-      color: metrics.incomeGrowth >= 0 ? "text-green-600" : "text-red-600",
-      bgColor: metrics.incomeGrowth >= 0 ? "bg-green-50" : "bg-red-50",
+      color: metrics.incomeGrowth >= 0 ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400",
+      bgColor: metrics.incomeGrowth >= 0 ? "bg-green-50 dark:bg-green-950/40" : "bg-red-50 dark:bg-red-950/40",
     },
     {
       title: "Rate Growth",
       value: `${metrics.rateGrowth >= 0 ? "+" : ""}${metrics.rateGrowth.toFixed(1)}%`,
       icon: metrics.rateGrowth >= 0 ? TrendingUp : TrendingDown,
-      color: metrics.rateGrowth >= 0 ? "text-green-600" : "text-red-600",
-      bgColor: metrics.rateGrowth >= 0 ? "bg-green-50" : "bg-red-50",
+      color: metrics.rateGrowth >= 0 ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400",
+      bgColor: metrics.rateGrowth >= 0 ? "bg-green-50 dark:bg-green-950/40" : "bg-red-50 dark:bg-red-950/40",
     },
     {
       title: "Average Rate",
       value: `$${metrics.avgRate.toFixed(2)}`,
       icon: DollarSign,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50",
+      color: "text-blue-600 dark:text-blue-400",
+      bgColor: "bg-blue-50 dark:bg-blue-950/40",
     },
     {
       title: "Highest Transaction",
       value: `$${metrics.highestTransaction.toFixed(2)}`,
       icon: Award,
-      color: "text-purple-600",
-      bgColor: "bg-purple-50",
+      color: "text-purple-600 dark:text-purple-400",
+      bgColor: "bg-purple-50 dark:bg-purple-950/40",
     },
     {
       title: "Most Productive",
@@ -80,15 +80,15 @@ export function PerformanceMetrics({ data }: PerformanceMetricsProps) {
         day: "numeric",
       }),
       icon: Target,
-      color: "text-orange-600",
-      bgColor: "bg-orange-50",
+      color: "text-orange-600 dark:text-orange-400",
+      bgColor: "bg-orange-50 dark:bg-orange-950/40",
     },
     {
       title: "Active Projects",
       value: metrics.totalProjects.toString(),
       icon: Clock,
-      color: "text-indigo-600",
-      bgColor: "bg-indigo-50",
+      color: "text-indigo-600 dark:text-indigo-400",
+      bgColor: "bg-indigo-50 dark:bg-indigo-950/40",
     },
   ]
 
@@ -99,8 +99,8 @@ export function PerformanceMetrics({ data }: PerformanceMetricsProps) {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-600 mb-1">{card.title}</p>
-                <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+                <p className="text-sm font-medium text-muted-foreground mb-1">{card.title}</p>
+                <p className="text-2xl font-bold text-foreground">{card.value}</p>
               </div>
               <div className={`inline-flex items-center justify-center w-12 h-12 rounded-full ${card.bgColor}`}>
                 <card.icon className={`w-6 h-6 ${card.color}`} />

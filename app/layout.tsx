@@ -1,7 +1,23 @@
 import type { Metadata } from "next";
+import { Inter, Space_Grotesk } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Script from "next/script";
+import { ThemeProvider } from "@/components/theme-provider";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+// Used only for the landing page's decorative card titles — a bolder,
+// more geometric display face than the app's default Inter body text.
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Upwork Income Analytics Dashboard",
@@ -72,7 +88,7 @@ export const metadata: Metadata = {
   },
   viewport:
     "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
-  colorScheme: "light",
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({
@@ -81,9 +97,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body>
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
         <GoogleAnalytics gaId="G-EMZ5EGH8N2" />
       </body>
 

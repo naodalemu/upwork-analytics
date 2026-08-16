@@ -104,3 +104,50 @@ export function filterDataByDateRange(data: TransactionData[], range: string | D
   }
   return data // Fallback if no valid range is provided
 }
+
+/**
+ * The actual [start, end] calendar boundary implied by the selected date filter -
+ * as opposed to the span between the earliest/latest transaction that happens to
+ * fall inside it, which can be narrower if there's no logged data right at the
+ * edges of the selected range.
+ */
+export function getEffectiveDateRange(
+  allData: TransactionData[],
+  dateFilter: string,
+  customDateRange?: DateRange,
+): { start: Date; end: Date } | null {
+  if (customDateRange?.from) {
+    const start = new Date(customDateRange.from)
+    start.setHours(0, 0, 0, 0)
+
+    const end = customDateRange.to ? new Date(customDateRange.to) : new Date()
+    end.setHours(23, 59, 59, 999)
+
+    return { start, end }
+  }
+
+  if (dateFilter !== "all") {
+    const days = Number.parseInt(dateFilter)
+    if (!isNaN(days)) {
+      const end = new Date()
+      end.setHours(23, 59, 59, 999)
+
+      const start = new Date()
+      start.setDate(start.getDate() - days)
+      start.setHours(0, 0, 0, 0)
+
+      return { start, end }
+    }
+  }
+
+  // "All Time" - span of the full, unfiltered dataset
+  const timestamps = allData.map((t) => new Date(t.date).getTime()).filter((t) => !isNaN(t))
+  if (timestamps.length === 0) return null
+
+  const start = new Date(Math.min(...timestamps))
+  start.setHours(0, 0, 0, 0)
+  const end = new Date(Math.max(...timestamps))
+  end.setHours(23, 59, 59, 999)
+
+  return { start, end }
+}

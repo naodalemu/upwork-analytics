@@ -41,13 +41,13 @@ export function WeeklyPatternChart({ data }: WeeklyPatternChartProps) {
     if (active && payload && payload.length) {
       const data = payload[0].payload
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-medium text-gray-900 mb-1">{data.day}</p>
-          <p className="text-green-600">
+        <div className="bg-popover text-popover-foreground p-3 border border-border rounded-lg shadow-lg">
+          <p className="font-medium text-foreground mb-1">{data.day}</p>
+          <p className="text-green-600 dark:text-green-400">
             Total Income: ${data.income.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
-          <p className="text-blue-600">Total Hours: {data.hours.toFixed(2)}h</p>
-          <p className="text-purple-600">
+          <p className="text-blue-600 dark:text-blue-400">Total Hours: {data.hours.toFixed(2)}h</p>
+          <p className="text-purple-600 dark:text-purple-400">
             Avg Income per Transaction: $
             {data.avgIncome.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
@@ -66,9 +66,12 @@ export function WeeklyPatternChart({ data }: WeeklyPatternChartProps) {
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={weeklyData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="day" tick={{ fontSize: 12 }} />
-              <YAxis tick={{ fontSize: 12 }} tickFormatter={(value) => `$${value.toLocaleString()}`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis dataKey="day" tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }} />
+              <YAxis
+                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+                tickFormatter={(value) => `$${value.toLocaleString()}`}
+              />
               <Tooltip content={<CustomTooltip />} />
               <Bar dataKey="income" fill="#3B82F6" name="income" />
             </BarChart>

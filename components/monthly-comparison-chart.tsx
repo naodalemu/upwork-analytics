@@ -45,8 +45,8 @@ export function MonthlyComparisonChart({ data }: MonthlyComparisonChartProps) {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-medium text-gray-900 mb-1">{label}</p>
+        <div className="bg-popover text-popover-foreground p-3 border border-border rounded-lg shadow-lg">
+          <p className="font-medium text-foreground mb-1">{label}</p>
           {payload.map((entry: any, index: number) => (
             <p key={`item-${index}`} className="text-sm" style={{ color: entry.color }}>
               {entry.name}: $
@@ -68,9 +68,12 @@ export function MonthlyComparisonChart({ data }: MonthlyComparisonChartProps) {
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={comparisonData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="month" tick={{ fontSize: 12 }} />
-              <YAxis tick={{ fontSize: 12 }} tickFormatter={(value) => `$${value.toLocaleString()}`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis dataKey="month" tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }} />
+              <YAxis
+                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+                tickFormatter={(value) => `$${value.toLocaleString()}`}
+              />
               <Tooltip content={<CustomTooltip />} />
               {years.map((year, index) => (
                 <Bar key={year} dataKey={year.toString()} fill={COLORS[index % COLORS.length]} name={year.toString()} />

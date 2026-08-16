@@ -50,8 +50,8 @@ export function SeasonalAnalysis({ data }: SeasonalAnalysisProps) {
     if (active && payload && payload.length) {
       const data = payload[0].payload
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-medium text-gray-900 mb-1">{data.quarter}</p>
+        <div className="bg-popover text-popover-foreground p-3 border border-border rounded-lg shadow-lg">
+          <p className="font-medium text-foreground mb-1">{data.quarter}</p>
           <p className="text-orange-600 font-semibold">
             Total Income: ${data.income.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </p>
@@ -70,9 +70,18 @@ export function SeasonalAnalysis({ data }: SeasonalAnalysisProps) {
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={seasonalData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="quarter" tick={{ fontSize: 12 }} angle={-45} textAnchor="end" height={60} />
-              <YAxis tick={{ fontSize: 12 }} tickFormatter={(value) => `$${value.toLocaleString()}`} />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+              <XAxis
+                dataKey="quarter"
+                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+                angle={-45}
+                textAnchor="end"
+                height={60}
+              />
+              <YAxis
+                tick={{ fontSize: 12, fill: "hsl(var(--muted-foreground))" }}
+                tickFormatter={(value) => `$${value.toLocaleString()}`}
+              />
               <Tooltip content={<CustomTooltip />} />
               <Line
                 type="monotone"
