@@ -52,7 +52,7 @@ export function WelcomeScreen({ onFileUpload, isLoading }: WelcomeScreenProps) {
 
       <PrivacySection />
 
-      <Instructions />
+      {/* <Instructions /> */}
 
       <FooterCta onScrollTo={handleScrollTo} />
     </div>
