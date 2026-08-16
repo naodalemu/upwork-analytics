@@ -17,7 +17,7 @@ export function FooterCta({ onScrollTo }: FooterCtaProps) {
     <footer id="contact" className="bg-muted/40 dark:bg-background px-4 py-6 sm:px-6 sm:py-10">
       <div className="container mx-auto max-w-5xl space-y-4">
         {/* CTA card */}
-        {/* <div className="relative overflow-hidden rounded-3xl bg-foreground text-background px-6 py-16 sm:py-20">
+        <div className="relative overflow-hidden rounded-3xl bg-foreground text-background px-6 py-16 sm:py-20">
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.06] to-transparent" />
           <div className="relative max-w-xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-semibold mb-4">Get in touch</h2>
@@ -32,7 +32,7 @@ export function FooterCta({ onScrollTo }: FooterCtaProps) {
               </Button>
             </Link>
           </div>
-        </div> */}
+        </div>
 
         {/* Footer links card */}
         <div className="relative overflow-hidden rounded-3xl border border-border bg-card px-6 pt-10 sm:px-10">
