@@ -13,7 +13,7 @@ export function PrivacySection() {
           transition={{ duration: 0.6 }}
           className="text-7xl sm:text-8xl md:text-[8rem] lg:text-[9rem] font-semibold tracking-tight leading-[0.92] text-balance"
         >
-          <span className="text-foreground">Your data is yours.</span>
+          <span className="text-foreground lg:text-nowrap">Your data is yours.</span>
           <br />
           <span className="text-muted-foreground">Period.</span>
         </motion.h2>
